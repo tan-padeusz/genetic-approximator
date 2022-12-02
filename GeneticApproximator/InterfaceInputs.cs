@@ -30,7 +30,12 @@ public static class InterfaceInputs
     /// <summary>
     /// Max degree of result polynomial.
     /// </summary>
-    public static int PolynomialDegree { get; set; } = 3;
+    public static int MaxPolynomialDegree { get; set; } = 3;
+
+    /// <summary>
+    /// Probability of mutating a gene.
+    /// </summary>
+    public static double MutationProbability { get; set; } = 0.01;
 
     /// <summary>
     /// Number of individuals in each population.

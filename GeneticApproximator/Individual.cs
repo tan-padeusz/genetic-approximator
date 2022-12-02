@@ -13,17 +13,17 @@ public class Individual
     /// <summary>
     /// Individual error.
     /// </summary>
-    private double Error { get; }
+    public double Error { get; }
     
     /// <summary>
     /// Individual factors used in it's polynomial.
     /// </summary>
-    private double[,] Factors { get; }
+    public double[,] Factors { get; }
     
     /// <summary>
     /// Individual genes.
     /// </summary>
-    private bool[] Genes { get; }
+    public Genes Genes { get; }
 
     /// <summary>
     /// Creates new, random Individual.
@@ -31,26 +31,21 @@ public class Individual
     /// <param name="points">Array of input Points.</param>
     public Individual(Point[] points)
     {
-        this.Genes = this.GenerateGenes();
-        this.Factors = new double[InterfaceInputs.PolynomialDegree + 1, InterfaceInputs.PolynomialDegree + 1];
+        this.Genes = new Genes();
+        this.Factors = this.DecodeGenes();
+        this.Error = this.CalculateError(points);
     }
 
     /// <summary>
-    /// Creates new Individual as offspring of two other Individuals.
+    /// Creates new offspring Individual.
     /// </summary>
     /// <param name="points">Array of input Points.</param>
     /// <param name="parents">Parents of new Individual.</param>
     public Individual(Point[] points, Parents parents)
     {
-        
-    }
-
-    private bool[] GenerateGenes()
-    {
-        int size = InterfaceInputs.BitsPerFactor * (int)Math.Pow(InterfaceInputs.PolynomialDegree + 1, 2);
-        bool[] genes = new bool[size];
-        for (int index = 0; index < size; index++) genes[index] = Individual.Random.Next() % 2 == 1;
-        return genes;
+        this.Genes = new Genes(parents);
+        this.Factors = this.DecodeGenes();
+        this.Error = this.CalculateError(points);
     }
 
     /// <summary>
@@ -59,21 +54,16 @@ public class Individual
     /// <returns>Two-dimensional array of Individual polynomial factors.</returns>
     private double[,] DecodeGenes()
     {
-        int bpf = InterfaceInputs.BitsPerFactor;
-        int pd = InterfaceInputs.PolynomialDegree;
-        double[] av = this.GenerateAxisValues();
-        double[,] factors = new double[pd + 1, pd + 1];
+        int bitsPerFactor = InterfaceInputs.BitsPerFactor;
+        int maxPolynomialDegree = InterfaceInputs.MaxPolynomialDegree;
+        double[] axisValues = this.GenerateAxisValues();
+        double[,] factors = new double[maxPolynomialDegree + 1, maxPolynomialDegree + 1];
         
-        for (int xd = 0; xd <= pd; xd++) for (int yd = 0; yd <= pd; yd++)
+        for (int xi = 0; xi <= maxPolynomialDegree; xi++) for (int yi = 0; yi <= maxPolynomialDegree; yi++)
         {
             double factor = 0;
-            int sgi = (xd * (pd + 1) + yd) * bpf; // sgi = starting gene index
-            for (int cgi = sgi; cgi < sgi + bpf; cgi++) // cgi = current gene index
-            {
-                int currentAxisValueIndex = cgi % bpf;
-                if (this.Genes[cgi]) factor += av[currentAxisValueIndex];
-            }
-            factors[xd, yd] = factor / bpf;
+            for (int gi = 0; gi < bitsPerFactor; gi++) if (this.Genes[xi, yi, gi]) factor += axisValues[gi];
+            factors[xi, yi] = factor / bitsPerFactor;
         }
         
         return factors;
@@ -93,5 +83,24 @@ public class Individual
         axisValues[0] = -bv;
         for (int index = 1; index < bpf; index++) axisValues[index] = axisValues[index - 1] + step;
         return axisValues;
+    }
+
+    /// <summary>
+    /// Calculates Individual Error.
+    /// </summary>
+    /// <param name="points">Array of input Points.</param>
+    /// <returns>Individual Error value.</returns>
+    private double CalculateError(Point[] points)
+    {
+        double error = 0;
+        foreach (Point point in points)
+        {
+            double partialError = 0;
+            for (int xi = 0; xi <= InterfaceInputs.MaxPolynomialDegree; xi++)
+            for (int yi = 0; yi <= InterfaceInputs.MaxPolynomialDegree; yi++)
+                partialError += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
+            error += Math.Pow(partialError - point.Z, 2);
+        }
+        return error / points.Length;
     }
 }
