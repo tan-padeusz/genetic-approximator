@@ -1,6 +1,6 @@
 ﻿namespace GeneticApproximator;
 
-partial class Form1
+partial class ProgramForm
 {
     /// <summary>
     ///  Required designer variable.

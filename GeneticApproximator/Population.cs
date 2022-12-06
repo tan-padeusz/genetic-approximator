@@ -6,6 +6,8 @@ public class Population
     
     public double AverageError { get; }
     
+    public Individual BestIndividual { get; }
+    
     public long Id { get; }
     
     private Individual[] Individuals { get; }
@@ -14,6 +16,7 @@ public class Population
     {
         this.Id = 1;
         this.Individuals = this.GeneratePopulation(points);
+        this.BestIndividual = this.FindBestIndividual();
         this.AverageError = this.CalculateAverageError();
     }
 
@@ -21,6 +24,7 @@ public class Population
     {
         this.Id = previousPopulation.Id + 1;
         this.Individuals = this.GeneratePopulation(points, previousPopulation);
+        this.BestIndividual = this.FindBestIndividual();
         this.AverageError = this.CalculateAverageError();
     }
 
@@ -73,5 +77,16 @@ public class Population
         }
         Parents parents = new Parents(bestIndividuals[0]!, bestIndividuals[1]!);
         return new Individual(points, parents);
+    }
+
+    private Individual FindBestIndividual()
+    {
+        Individual bestIndividual = this.Individuals[0];
+        for (int index = 1; index < InterfaceInputs.PopulationSize; index++)
+        {
+            Individual currentIndividual = this.Individuals[index];
+            if (currentIndividual.Error < bestIndividual.Error) bestIndividual = currentIndividual;
+        }
+        return bestIndividual;
     }
 }

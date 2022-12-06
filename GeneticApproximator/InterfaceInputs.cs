@@ -38,6 +38,11 @@ public static class InterfaceInputs
     public static double MutationProbability { get; set; } = 0.01;
 
     /// <summary>
+    /// Array of input points.
+    /// </summary>
+    public static Point[] InputPoints { get; set; } = new Point[0];
+
+    /// <summary>
     /// Number of individuals in each population.
     /// </summary>
     public static int PopulationSize { get; set; } = 100;
