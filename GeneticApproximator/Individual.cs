@@ -41,7 +41,7 @@ public class Individual
     /// </summary>
     /// <param name="points">Array of input Points.</param>
     /// <param name="parents">Parents of new Individual.</param>
-    public Individual(Point[] points, Parents parents)
+    public Individual(Point[] points, Individual[] parents)
     {
         this.GeneSequence = new GeneSequence(parents);
         this.Factors = this.DecodeGenes();

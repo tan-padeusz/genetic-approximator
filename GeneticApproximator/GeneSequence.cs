@@ -48,14 +48,14 @@ public class GeneSequence
     /// Creates new gene sequence for offspring <see cref="Individual">individual</see>.
     /// </summary>
     /// <param name="parents">Individual parents.</param>
-    public GeneSequence(Parents parents)
+    public GeneSequence(Individual[] parents)
     {
         int size = (int)Math.Pow(InterfaceInputs.MaxPolynomialDegree + 1, 2) * InterfaceInputs.BitsPerFactor;
         Gene[] genes = new Gene[size];
         int divisionPointIndex = GeneSequence.Random.Next(size - 1);
         for (int index = 0; index < size; index++)
         {
-            Individual currentParent = index <= divisionPointIndex ? parents.First : parents.Second;
+            Individual currentParent = index <= divisionPointIndex ? parents[0] : parents[1];
             bool geneValue = GeneSequence.Random.NextDouble() < InterfaceInputs.MutationProbability
                 ? currentParent.GeneSequence[index].Value
                 : !currentParent.GeneSequence[index].Value;

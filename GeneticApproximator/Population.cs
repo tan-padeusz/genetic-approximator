@@ -64,18 +64,17 @@ public class Population
     private Individual Contest(Point[] points, Population previousPopulation)
     {
         int availableIndividuals = previousPopulation.Individuals.Length;
-        Individual?[] bestIndividuals = new Individual?[] { null, null };
+        Individual?[] parents = new Individual?[] { null, null };
         for (int contestantIndex = 0; contestantIndex < InterfaceInputs.Contestants * 2; contestantIndex++)
         {
             int randomIndex = Population.Random.Next(availableIndividuals);
             Individual individual = previousPopulation.Individuals[randomIndex];
             int groupIndex = contestantIndex % 2;
-            if (bestIndividuals[groupIndex] == null || bestIndividuals[groupIndex]!.Error > individual.Error)
-                bestIndividuals[groupIndex] = individual;
+            if (parents[groupIndex] == null || parents[groupIndex]!.Error > individual.Error)
+                parents[groupIndex] = individual;
             previousPopulation.Individuals[randomIndex] = previousPopulation.Individuals[availableIndividuals - 1];
             availableIndividuals--;
         }
-        Parents parents = new Parents(bestIndividuals[0]!, bestIndividuals[1]!);
         return new Individual(points, parents);
     }
 
