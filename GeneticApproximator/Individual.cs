@@ -23,7 +23,7 @@ public class Individual
     /// <summary>
     /// Individual genes.
     /// </summary>
-    public Genes Genes { get; }
+    public GeneSequence GeneSequence { get; }
 
     /// <summary>
     /// Creates new, random Individual.
@@ -31,7 +31,7 @@ public class Individual
     /// <param name="points">Array of input Points.</param>
     public Individual(Point[] points)
     {
-        this.Genes = new Genes();
+        this.GeneSequence = new GeneSequence();
         this.Factors = this.DecodeGenes();
         this.Error = this.CalculateError(points);
     }
@@ -43,7 +43,7 @@ public class Individual
     /// <param name="parents">Parents of new Individual.</param>
     public Individual(Point[] points, Parents parents)
     {
-        this.Genes = new Genes(parents);
+        this.GeneSequence = new GeneSequence(parents);
         this.Factors = this.DecodeGenes();
         this.Error = this.CalculateError(points);
     }
@@ -62,7 +62,7 @@ public class Individual
         for (int xi = 0; xi <= maxPolynomialDegree; xi++) for (int yi = 0; yi <= maxPolynomialDegree; yi++)
         {
             double factor = 0;
-            for (int gi = 0; gi < bitsPerFactor; gi++) if (this.Genes[xi, yi, gi]) factor += axisValues[gi];
+            for (int gi = 0; gi < bitsPerFactor; gi++) if (this.GeneSequence[xi, yi, gi].Value) factor += axisValues[gi];
             factors[xi, yi] = factor / bitsPerFactor;
         }
         
