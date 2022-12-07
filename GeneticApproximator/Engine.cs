@@ -59,6 +59,7 @@ public static class Engine
             double pointError = Engine.GlobalBestIndividual.CalculatePointError(point);
             builder.Append($"{point.ToString()} : {pointError}\n");
         }
+        builder.Remove(builder.Length - 2, 2);
         Program.ProgramForm.ControlResultsRTB.Text = builder.ToString();
     }
 

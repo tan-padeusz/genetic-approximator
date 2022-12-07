@@ -16,11 +16,12 @@ public partial class ProgramForm : Form
         InterfaceInputs.MutationProbability = (double)this.MutationProbabilityNUD.Value;
         InterfaceInputs.PopulationSize = (int)this.PopulationSizeNUD.Value;
 
-        int pointCount = (int)this.InputPointsNUD.Value;
-        double pointRange = (double)this.CoordinatesRangeNUD.Value;
-        Point[] points = new Point[pointCount];
-        for (int index = 0; index < pointCount; index++) points[index] = new Point(pointRange);
-        InterfaceInputs.InputPoints = points;
+        // int pointCount = (int)this.InputPointsNUD.Value;
+        // double pointRange = (double)this.CoordinatesRangeNUD.Value;
+        // Point[] points = new Point[pointCount];
+        // for (int index = 0; index < pointCount; index++) points[index] = new Point(pointRange);
+        // InterfaceInputs.InputPoints = points;
+        InterfaceInputs.InputPoints = Point.GetTestPoints();
         
         Program.BackgroundWorker.RunWorkerAsync();
     }
@@ -32,8 +33,10 @@ public partial class ProgramForm : Form
 
     private void ClearOutputs()
     {
-        this.PopulationsCreatedOutputLabel.Text = "POPULATIONS CREATED";
-        this.MinimalErrorOutputLabel.Text = "MINIMAL ERROR";
-        this.BestFunctionOutputLabel.Text = "BEST FUNCTION";
+        this.ElapsedTimeOutputLabel.Text = "";
+        this.PopulationsCreatedOutputLabel.Text = "";
+        this.MinimalErrorOutputLabel.Text = "";
+        this.BestFunctionOutputLabel.Text = "";
+        this.ControlResultsRTB.Clear();
     }
 }

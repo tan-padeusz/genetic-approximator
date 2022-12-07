@@ -58,8 +58,8 @@ partial class ProgramForm
         /// AxisBorderValueLabel
         this.AxisBorderValueLabel.Location = new System.Drawing.Point(10, 310);
         this.AxisBorderValueLabel.Size = new System.Drawing.Size(200, 20);
-        this.AxisBorderValueLabel.Text = "Absolutna wartość graniczna osi:";
-        this.AxisBorderValueLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.AxisBorderValueLabel.Text = "AXIS BORDER VALUE";
+        this.AxisBorderValueLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// AxisBorderValueNUD
         this.AxisBorderValueNUD.DecimalPlaces = 3;
@@ -74,7 +74,7 @@ partial class ProgramForm
         /// BestFunctionLabel
         this.BestFunctionLabel.Location = new System.Drawing.Point(230, 60);
         this.BestFunctionLabel.Size = new System.Drawing.Size(610, 20);
-        this.BestFunctionLabel.Text = "Najlepsza znaleziona funkcja:";
+        this.BestFunctionLabel.Text = "BEST FUNCTION";
         this.BestFunctionLabel.TextAlign = ContentAlignment.MiddleLeft;
         
         /// BestFunctionOutputLabel
@@ -86,8 +86,8 @@ partial class ProgramForm
         /// BitsPerFactorLabel
         this.BitsPerFactorLabel.Location = new System.Drawing.Point(10, 260);
         this.BitsPerFactorLabel.Size = new System.Drawing.Size(200, 20);
-        this.BitsPerFactorLabel.Text = "Liczba bitów na współczynnik:";
-        this.BitsPerFactorLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.BitsPerFactorLabel.Text = "BITS PER FACTOR";
+        this.BitsPerFactorLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// BitsPerFactorNUD
         this.BitsPerFactorNUD.Increment = 1;
@@ -101,8 +101,8 @@ partial class ProgramForm
         /// ContestantsLabel
         this.ContestantsLabel.Location = new System.Drawing.Point(10, 210);
         this.ContestantsLabel.Size = new System.Drawing.Size(200, 20);
-        this.ContestantsLabel.Text = "Liczba uczestników turnieju:";
-        this.ContestantsLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.ContestantsLabel.Text = "CONTESTANTS";
+        this.ContestantsLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// ContestantsNUD
         this.ContestantsNUD.Increment = 5;
@@ -120,8 +120,8 @@ partial class ProgramForm
         /// CoordinatesRangeLabel
         this.CoordinatesRangeLabel.Location = new System.Drawing.Point(10, 60);
         this.CoordinatesRangeLabel.Size = new System.Drawing.Size(200, 20);
-        this.CoordinatesRangeLabel.Text = "Zakres współrzędnych punktów:";
-        this.CoordinatesRangeLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.CoordinatesRangeLabel.Text = "COORDINATES RANGE";
+        this.CoordinatesRangeLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// CoordinatesRangeNUD
         this.CoordinatesRangeNUD.DecimalPlaces = 3;
@@ -136,7 +136,7 @@ partial class ProgramForm
         /// ElapsedTimeLabel
         this.ElapsedTimeLabel.Location = new System.Drawing.Point(230, 10);
         this.ElapsedTimeLabel.Size = new System.Drawing.Size(200, 20);
-        this.ElapsedTimeLabel.Text = "CZAS";
+        this.ElapsedTimeLabel.Text = "TIME";
         this.ElapsedTimeLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// ElapsedTimeOutputLabel
@@ -153,8 +153,8 @@ partial class ProgramForm
         /// InputPointsLabel
         this.InputPointsLabel.Location = new System.Drawing.Point(10, 10);
         this.InputPointsLabel.Size = new System.Drawing.Size(200, 20);
-        this.InputPointsLabel.Text = "Liczba punktów wejściowych:";
-        this.InputPointsLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.InputPointsLabel.Text = "INPUT POINTS";
+        this.InputPointsLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// InputPointsNUD
         this.InputPointsNUD.Increment = 2;
@@ -168,8 +168,8 @@ partial class ProgramForm
         /// MaxPolynomialDegreeLabel
         this.MaxPolynomialDegreeLabel.Location = new System.Drawing.Point(10, 110);
         this.MaxPolynomialDegreeLabel.Size = new System.Drawing.Size(200, 20);
-        this.MaxPolynomialDegreeLabel.Text = "Maksymalny stopień wielomianu:";
-        this.MaxPolynomialDegreeLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.MaxPolynomialDegreeLabel.Text = "MAX POLYNOMIAL DEGREE";
+        this.MaxPolynomialDegreeLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// MaxPolynomialDegreeNUD
         this.MaxPolynomialDegreeNUD.Increment = 1;
@@ -183,7 +183,7 @@ partial class ProgramForm
         /// MinimalErrorLabel
         this.MinimalErrorLabel.Location = new System.Drawing.Point(640, 10);
         this.MinimalErrorLabel.Size = new System.Drawing.Size(200, 20);
-        this.MinimalErrorLabel.Text = "Najmniejszy znaleziony błąd:";
+        this.MinimalErrorLabel.Text = "MINIMAL ERROR";
         this.MinimalErrorLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// MinimalErrorOutputLabel
@@ -195,8 +195,8 @@ partial class ProgramForm
         /// MutationProbabilityLabel
         this.MutationProbabilityLabel.Location = new System.Drawing.Point(10, 360);
         this.MutationProbabilityLabel.Size = new System.Drawing.Size(200, 20);
-        this.MutationProbabilityLabel.Text = "Prawdopodobieństwo mutacji:";
-        this.MutationProbabilityLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.MutationProbabilityLabel.Text = "MUTATION PROBABILITY";
+        this.MutationProbabilityLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// MutationProbabilityNUD
         this.MutationProbabilityNUD.DecimalPlaces = 3;
@@ -211,7 +211,7 @@ partial class ProgramForm
         /// PopulationsCreatedLabel
         this.PopulationsCreatedLabel.Location = new System.Drawing.Point(430, 10);
         this.PopulationsCreatedLabel.Size = new System.Drawing.Size(200, 20);
-        this.PopulationsCreatedLabel.Text = "Liczba utworzonych populacji:";
+        this.PopulationsCreatedLabel.Text = "POPULATIONS CREATED";
         this.PopulationsCreatedLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// PopulationsCreatedOutputLabel
@@ -223,8 +223,8 @@ partial class ProgramForm
         /// PopulationSizeLabel
         this.PopulationSizeLabel.Location = new System.Drawing.Point(10, 160);
         this.PopulationSizeLabel.Size = new System.Drawing.Size(200, 20);
-        this.PopulationSizeLabel.Text = "Liczba osobników w populacji:";
-        this.PopulationSizeLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.PopulationSizeLabel.Text = "POPULATION SIZE";
+        this.PopulationSizeLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// PopulationSizeNUD
         this.PopulationSizeNUD.Increment = 100;
@@ -288,6 +288,6 @@ partial class ProgramForm
             this.StopButton,
             this.VerticalSeparator
         });
-        this.Text = "Genetic Approximator";
+        this.Text = "GENETIC APPROXIMATOR";
     }
 }
