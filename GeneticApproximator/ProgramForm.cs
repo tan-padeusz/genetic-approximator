@@ -16,4 +16,11 @@ public partial class ProgramForm : Form
     {
         
     }
+
+    private void ClearOutputs()
+    {
+        this.PopulationsCreatedOutputLabel.Text = "POPULATIONS CREATED";
+        this.MinimalErrorOutputLabel.Text = "MINIMAL ERROR";
+        this.BestFunctionOutputLabel.Text = "BEST FUNCTION";
+    }
 }

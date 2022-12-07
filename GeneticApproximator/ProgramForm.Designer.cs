@@ -6,6 +6,8 @@ partial class ProgramForm
 {
     public Label AxisBorderValueLabel { get; } = new Label();
     public NumericUpDown AxisBorderValueNUD { get; } = new NumericUpDown();
+    public Label BestFunctionLabel { get; } = new Label();
+    public Label BestFunctionOutputLabel { get; } = new Label();
     public Label BitsPerFactorLabel { get; } = new Label();
     public NumericUpDown BitsPerFactorNUD { get; } = new NumericUpDown();
     public Label ContestantsLabel { get; } = new Label();
@@ -16,8 +18,12 @@ partial class ProgramForm
     public NumericUpDown InputPointsNUD { get; } = new NumericUpDown();
     public Label MaxPolynomialDegreeLabel { get; } = new Label();
     public NumericUpDown MaxPolynomialDegreeNUD { get; } = new NumericUpDown();
+    public Label MinimalErrorLabel { get; } = new Label();
+    public Label MinimalErrorOutputLabel { get; } = new Label();
     public Label MutationProbabilityLabel { get; } = new Label();
     public NumericUpDown MutationProbabilityNUD { get; } = new NumericUpDown();
+    public Label PopulationsCreatedLabel { get; } = new Label();
+    public Label PopulationsCreatedOutputLabel { get; } = new Label();
     public Label PopulationSizeLabel { get; } = new Label();
     public NumericUpDown PopulationSizeNUD { get; } = new NumericUpDown();
     public Button StartButton { get; } = new Button();
@@ -60,6 +66,18 @@ partial class ProgramForm
         this.AxisBorderValueNUD.Size = new System.Drawing.Size(200, 20);
         this.AxisBorderValueNUD.TextAlign = HorizontalAlignment.Center;
         this.AxisBorderValueNUD.Value = 10;
+        
+        /// BestFunctionLabel
+        this.BestFunctionLabel.Location = new System.Drawing.Point(230, 110);
+        this.BestFunctionLabel.Size = new System.Drawing.Size(400, 20);
+        this.BestFunctionLabel.Text = "Najlepsza znaleziona funkcja:";
+        this.BestFunctionLabel.TextAlign = ContentAlignment.MiddleCenter;
+        
+        /// BestFunctionOutputLabel
+        this.BestFunctionOutputLabel.Location = new System.Drawing.Point(230, 130);
+        this.BestFunctionOutputLabel.Size = new System.Drawing.Size(400, 20);
+        this.BestFunctionOutputLabel.Text = "BEST FUNCTION";
+        this.BestFunctionOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// BitsPerFactorLabel
         this.BitsPerFactorLabel.Location = new System.Drawing.Point(10, 260);
@@ -106,7 +124,7 @@ partial class ProgramForm
         this.CoordinatesRangeNUD.Size = new System.Drawing.Size(200, 20);
         this.CoordinatesRangeNUD.TextAlign = HorizontalAlignment.Center;
         this.CoordinatesRangeNUD.Value = 100;
-        
+
         /// InputPointsLabel
         this.InputPointsLabel.Location = new System.Drawing.Point(10, 10);
         this.InputPointsLabel.Size = new System.Drawing.Size(200, 20);
@@ -137,6 +155,18 @@ partial class ProgramForm
         this.MaxPolynomialDegreeNUD.TextAlign = HorizontalAlignment.Center;
         this.MaxPolynomialDegreeNUD.Value = 2;
         
+        /// MinimalErrorLabel
+        this.MinimalErrorLabel.Location = new System.Drawing.Point(230, 60);
+        this.MinimalErrorLabel.Size = new System.Drawing.Size(200, 20);
+        this.MinimalErrorLabel.Text = "Najmniejszy znaleziony błąd:";
+        this.MinimalErrorLabel.TextAlign = ContentAlignment.MiddleCenter;
+        
+        /// MinimalErrorOutputLabel
+        this.MinimalErrorOutputLabel.Location = new System.Drawing.Point(230, 80);
+        this.MinimalErrorOutputLabel.Size = new System.Drawing.Size(200, 20);
+        this.MinimalErrorOutputLabel.Text = "MINIMAL ERROR";
+        this.MinimalErrorOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
+        
         /// MutationProbabilityLabel
         this.MutationProbabilityLabel.Location = new System.Drawing.Point(10, 360);
         this.MutationProbabilityLabel.Size = new System.Drawing.Size(200, 20);
@@ -152,6 +182,18 @@ partial class ProgramForm
         this.MutationProbabilityNUD.Size = new System.Drawing.Size(200, 20);
         this.MutationProbabilityNUD.TextAlign = HorizontalAlignment.Center;
         this.MutationProbabilityNUD.Value = (decimal)0.05;
+        
+        /// PopulationsCreatedLabel
+        this.PopulationsCreatedLabel.Location = new System.Drawing.Point(230, 10);
+        this.PopulationsCreatedLabel.Size = new System.Drawing.Size(200, 20);
+        this.PopulationsCreatedLabel.Text = "Liczba utworzonych populacji:";
+        this.PopulationsCreatedLabel.TextAlign = ContentAlignment.MiddleCenter;
+        
+        /// PopulationsCreatedOutputLabel
+        this.PopulationsCreatedOutputLabel.Location = new System.Drawing.Point(230, 30);
+        this.PopulationsCreatedOutputLabel.Size = new System.Drawing.Size(200, 20);
+        this.PopulationsCreatedOutputLabel.Text = "POPULATIONS CREATED";
+        this.PopulationsCreatedOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// PopulationSizeLabel
         this.PopulationSizeLabel.Location = new System.Drawing.Point(10, 160);
@@ -175,6 +217,13 @@ partial class ProgramForm
         this.StartButton.Text = "START";
         this.StartButton.TextAlign = ContentAlignment.MiddleCenter;
         
+        /// StopButton
+        this.StopButton.Click += new System.EventHandler(this.StopButtonClick);
+        this.StopButton.Location = new System.Drawing.Point(230, 410);
+        this.StopButton.Size = new System.Drawing.Size(200, 40);
+        this.StopButton.Text = "STOP";
+        this.StopButton.TextAlign = ContentAlignment.MiddleCenter;
+        
         /// VerticalSeparator
         this.VerticalSeparator.BackColor = Color.DarkGray;
         this.VerticalSeparator.Location = new System.Drawing.Point(219, 10);
@@ -186,6 +235,8 @@ partial class ProgramForm
         {
             this.AxisBorderValueLabel,
             this.AxisBorderValueNUD,
+            this.BestFunctionLabel,
+            this.BestFunctionOutputLabel,
             this.BitsPerFactorLabel,
             this.BitsPerFactorNUD,
             this.ContestantsLabel,
@@ -196,11 +247,16 @@ partial class ProgramForm
             this.InputPointsNUD,
             this.MaxPolynomialDegreeLabel,
             this.MaxPolynomialDegreeNUD,
+            this.MinimalErrorLabel,
+            this.MinimalErrorOutputLabel,
             this.MutationProbabilityLabel,
             this.MutationProbabilityNUD,
+            this.PopulationsCreatedLabel,
+            this.PopulationsCreatedOutputLabel,
             this.PopulationSizeLabel,
             this.PopulationSizeNUD,
             this.StartButton,
+            this.StopButton,
             this.VerticalSeparator
         });
         this.Text = "Genetic Approximator";
