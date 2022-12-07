@@ -1,4 +1,6 @@
-﻿namespace GeneticApproximator;
+﻿using System.Text;
+
+namespace GeneticApproximator;
 
 /// <summary>
 /// Class that represents single Individual.
@@ -26,9 +28,9 @@ public class Individual
     public GeneSequence GeneSequence { get; }
 
     /// <summary>
-    /// Creates new, random Individual.
+    /// Creates new individual with random genes.
     /// </summary>
-    /// <param name="points">Array of input Points.</param>
+    /// <param name="points">Array of input points.</param>
     public Individual(Point[] points)
     {
         this.GeneSequence = new GeneSequence();
@@ -76,7 +78,7 @@ public class Individual
     private double[] GenerateAxisValues()
     {
         int bpf = InterfaceInputs.BitsPerFactor;
-        double bv = InterfaceInputs.BorderValue;
+        double bv = InterfaceInputs.AxisBorderValue;
         double[] axisValues = new double[bpf];
         // start + (n - 1) * step = end => step = (end - start) / (n - 1)
         double step = (bv * 2) / (bpf - 1);
@@ -86,21 +88,43 @@ public class Individual
     }
 
     /// <summary>
-    /// Calculates Individual Error.
+    /// Calculates average error value for array of input points.
+    /// <br/>
+    /// This value also acts as result of objective function in genetic algorithm.
     /// </summary>
-    /// <param name="points">Array of input Points.</param>
-    /// <returns>Individual Error value.</returns>
+    /// <param name="points">Array of input points.</param>
+    /// <returns>Average error value for given array of input points.</returns>
     private double CalculateError(Point[] points)
     {
         double error = 0;
-        foreach (Point point in points)
-        {
-            double partialError = 0;
-            for (int xi = 0; xi <= InterfaceInputs.MaxPolynomialDegree; xi++)
-            for (int yi = 0; yi <= InterfaceInputs.MaxPolynomialDegree; yi++)
-                partialError += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
-            error += Math.Pow(partialError - point.Z, 2);
-        }
+        foreach (Point point in points) error += this.CalculatePointError(point);
         return error / points.Length;
+    }
+
+    /// <summary>
+    /// Calculates error value for single input point.
+    /// </summary>
+    /// <param name="point">Input point.</param>
+    /// <returns>Error value for given input point.</returns>
+    public double CalculatePointError(Point point)
+    {
+        int maxPolynomialDegree = InterfaceInputs.MaxPolynomialDegree;
+        double error = 0;
+        for (int xi = 0; xi <= maxPolynomialDegree; xi++) for (int yi = 0; yi <= maxPolynomialDegree; yi++)
+            error += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
+        return Math.Pow(error - point.Z, 2); // Possible other metrics.
+    }
+
+    public override string ToString()
+    {
+        StringBuilder builder = new StringBuilder();
+        int maxPolynomialDegree = InterfaceInputs.MaxPolynomialDegree;
+        for (int xi = 0; xi <= maxPolynomialDegree; xi++) for (int yi = 0; yi <= maxPolynomialDegree; yi++)
+        {
+            double factor = this.Factors[xi, yi];
+            if (factor >= 0) builder.Append('+');
+            builder.Append($"{factor}[${xi},${yi}]");
+        }
+        return builder.ToString();
     }
 }

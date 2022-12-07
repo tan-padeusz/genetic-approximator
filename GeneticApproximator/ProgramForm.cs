@@ -6,4 +6,14 @@ public partial class ProgramForm : Form
     {
         InitializeComponent();
     }
+
+    private void StartButtonClick(object sender, EventArgs args)
+    {
+        
+    }
+
+    private void StopButtonClick(object sender, EventArgs args)
+    {
+        
+    }
 }

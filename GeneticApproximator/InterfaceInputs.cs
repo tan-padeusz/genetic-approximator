@@ -3,14 +3,14 @@
 public static class InterfaceInputs
 {
     /// <summary>
+    /// Maximum (absolute) value of axis that further determines polynomial factors values.
+    /// </summary>
+    public static double AxisBorderValue { get; set; } = 100;
+    
+    /// <summary>
     /// Number of bits per factor.
     /// </summary>
     public static int BitsPerFactor { get; set; } = 8;
-
-    /// <summary>
-    /// Maximum 
-    /// </summary>
-    public static double BorderValue { get; set; } = 100;
     
     /// <summary>
     /// Number of contestants in contest.
@@ -21,11 +21,6 @@ public static class InterfaceInputs
     /// Maximum absolute value of input points coordinates.
     /// </summary>
     public static double CoordinatesRange { get; set; } = 1000;
-
-    /// <summary>
-    /// Number of input points.
-    /// </summary>
-    public static int Points { get; set; } = 100;
 
     /// <summary>
     /// Max degree of result polynomial.
