@@ -123,7 +123,7 @@ public class Individual
         {
             double factor = this.Factors[xi, yi];
             if (factor >= 0) builder.Append('+');
-            builder.Append($"{factor}[${xi},${yi}]");
+            builder.Append($"{factor}[{xi},{yi}]");
         }
         return builder.ToString();
     }

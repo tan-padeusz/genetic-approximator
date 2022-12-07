@@ -18,11 +18,6 @@ public static class InterfaceInputs
     public static int Contestants { get; set; } = 10;
 
     /// <summary>
-    /// Maximum absolute value of input points coordinates.
-    /// </summary>
-    public static double CoordinatesRange { get; set; } = 1000;
-
-    /// <summary>
     /// Max degree of result polynomial.
     /// </summary>
     public static int MaxPolynomialDegree { get; set; } = 3;

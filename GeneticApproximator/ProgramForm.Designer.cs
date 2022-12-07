@@ -12,8 +12,12 @@ partial class ProgramForm
     public NumericUpDown BitsPerFactorNUD { get; } = new NumericUpDown();
     public Label ContestantsLabel { get; } = new Label();
     public NumericUpDown ContestantsNUD { get; } = new NumericUpDown();
+    public RichTextBox ControlResultsRTB { get; } = new RichTextBox();
     public Label CoordinatesRangeLabel { get; } = new Label();
     public NumericUpDown CoordinatesRangeNUD { get; } = new NumericUpDown();
+    public Label ElapsedTimeLabel { get; } = new Label();
+    public Label ElapsedTimeOutputLabel { get; } = new Label();
+    public Label HorizontalSeparator { get; } = new Label();
     public Label InputPointsLabel { get; } = new Label();
     public NumericUpDown InputPointsNUD { get; } = new NumericUpDown();
     public Label MaxPolynomialDegreeLabel { get; } = new Label();
@@ -68,16 +72,16 @@ partial class ProgramForm
         this.AxisBorderValueNUD.Value = 10;
         
         /// BestFunctionLabel
-        this.BestFunctionLabel.Location = new System.Drawing.Point(230, 110);
-        this.BestFunctionLabel.Size = new System.Drawing.Size(400, 20);
+        this.BestFunctionLabel.Location = new System.Drawing.Point(230, 60);
+        this.BestFunctionLabel.Size = new System.Drawing.Size(610, 20);
         this.BestFunctionLabel.Text = "Najlepsza znaleziona funkcja:";
-        this.BestFunctionLabel.TextAlign = ContentAlignment.MiddleCenter;
+        this.BestFunctionLabel.TextAlign = ContentAlignment.MiddleLeft;
         
         /// BestFunctionOutputLabel
-        this.BestFunctionOutputLabel.Location = new System.Drawing.Point(230, 130);
-        this.BestFunctionOutputLabel.Size = new System.Drawing.Size(400, 20);
+        this.BestFunctionOutputLabel.Location = new System.Drawing.Point(230, 80);
+        this.BestFunctionOutputLabel.Size = new System.Drawing.Size(610, 20);
         this.BestFunctionOutputLabel.Text = "BEST FUNCTION";
-        this.BestFunctionOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
+        this.BestFunctionOutputLabel.TextAlign = ContentAlignment.MiddleLeft;
         
         /// BitsPerFactorLabel
         this.BitsPerFactorLabel.Location = new System.Drawing.Point(10, 260);
@@ -109,6 +113,10 @@ partial class ProgramForm
         this.ContestantsNUD.TextAlign = HorizontalAlignment.Center;
         this.ContestantsNUD.Value = 20;
         
+        /// ControlResultsRTB
+        this.ControlResultsRTB.Location = new System.Drawing.Point(230, 120);
+        this.ControlResultsRTB.Size = new System.Drawing.Size(610, 280);
+        
         /// CoordinatesRangeLabel
         this.CoordinatesRangeLabel.Location = new System.Drawing.Point(10, 60);
         this.CoordinatesRangeLabel.Size = new System.Drawing.Size(200, 20);
@@ -124,7 +132,24 @@ partial class ProgramForm
         this.CoordinatesRangeNUD.Size = new System.Drawing.Size(200, 20);
         this.CoordinatesRangeNUD.TextAlign = HorizontalAlignment.Center;
         this.CoordinatesRangeNUD.Value = 100;
-
+        
+        /// ElapsedTimeLabel
+        this.ElapsedTimeLabel.Location = new System.Drawing.Point(230, 10);
+        this.ElapsedTimeLabel.Size = new System.Drawing.Size(200, 20);
+        this.ElapsedTimeLabel.Text = "CZAS";
+        this.ElapsedTimeLabel.TextAlign = ContentAlignment.MiddleCenter;
+        
+        /// ElapsedTimeOutputLabel
+        this.ElapsedTimeOutputLabel.Location = new System.Drawing.Point(230, 30);
+        this.ElapsedTimeOutputLabel.Size = new System.Drawing.Size(200, 20);
+        this.ElapsedTimeOutputLabel.Text = "TIME";
+        this.ElapsedTimeOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
+        
+        /// HorizontalSeparator
+        this.HorizontalSeparator.BackColor = Color.DarkGray;
+        this.HorizontalSeparator.Location = new System.Drawing.Point(230, 109);
+        this.HorizontalSeparator.Size = new System.Drawing.Size(610, 3);
+        
         /// InputPointsLabel
         this.InputPointsLabel.Location = new System.Drawing.Point(10, 10);
         this.InputPointsLabel.Size = new System.Drawing.Size(200, 20);
@@ -156,13 +181,13 @@ partial class ProgramForm
         this.MaxPolynomialDegreeNUD.Value = 2;
         
         /// MinimalErrorLabel
-        this.MinimalErrorLabel.Location = new System.Drawing.Point(230, 60);
+        this.MinimalErrorLabel.Location = new System.Drawing.Point(640, 10);
         this.MinimalErrorLabel.Size = new System.Drawing.Size(200, 20);
         this.MinimalErrorLabel.Text = "Najmniejszy znaleziony błąd:";
         this.MinimalErrorLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// MinimalErrorOutputLabel
-        this.MinimalErrorOutputLabel.Location = new System.Drawing.Point(230, 80);
+        this.MinimalErrorOutputLabel.Location = new System.Drawing.Point(640, 30);
         this.MinimalErrorOutputLabel.Size = new System.Drawing.Size(200, 20);
         this.MinimalErrorOutputLabel.Text = "MINIMAL ERROR";
         this.MinimalErrorOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -184,13 +209,13 @@ partial class ProgramForm
         this.MutationProbabilityNUD.Value = (decimal)0.05;
         
         /// PopulationsCreatedLabel
-        this.PopulationsCreatedLabel.Location = new System.Drawing.Point(230, 10);
+        this.PopulationsCreatedLabel.Location = new System.Drawing.Point(430, 10);
         this.PopulationsCreatedLabel.Size = new System.Drawing.Size(200, 20);
         this.PopulationsCreatedLabel.Text = "Liczba utworzonych populacji:";
         this.PopulationsCreatedLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// PopulationsCreatedOutputLabel
-        this.PopulationsCreatedOutputLabel.Location = new System.Drawing.Point(230, 30);
+        this.PopulationsCreatedOutputLabel.Location = new System.Drawing.Point(430, 30);
         this.PopulationsCreatedOutputLabel.Size = new System.Drawing.Size(200, 20);
         this.PopulationsCreatedOutputLabel.Text = "POPULATIONS CREATED";
         this.PopulationsCreatedOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -230,7 +255,7 @@ partial class ProgramForm
         this.VerticalSeparator.Size = new System.Drawing.Size(3, 440);
         
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(800, 460);
+        this.ClientSize = new System.Drawing.Size(850, 460);
         this.Controls.AddRange(new Control[]
         {
             this.AxisBorderValueLabel,
@@ -241,8 +266,12 @@ partial class ProgramForm
             this.BitsPerFactorNUD,
             this.ContestantsLabel,
             this.ContestantsNUD,
+            this.ControlResultsRTB,
             this.CoordinatesRangeLabel,
             this.CoordinatesRangeNUD,
+            this.ElapsedTimeLabel,
+            this.ElapsedTimeOutputLabel,
+            this.HorizontalSeparator,
             this.InputPointsLabel,
             this.InputPointsNUD,
             this.MaxPolynomialDegreeLabel,

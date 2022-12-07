@@ -33,12 +33,12 @@ public class Point
     /// <summary>
     /// Point constructor.
     /// </summary>
-    public Point()
+    public Point(double range)
     {
         double[] coordinates = new double[3];
         for (int index = 0; index < coordinates.Length; index++)
         {
-            double coordinate = Point.Random.NextDouble() * InterfaceInputs.CoordinatesRange;
+            double coordinate = Point.Random.NextDouble() * range;
             if (this.ShouldCoordinateBeNegative()) coordinate *= -1;
             coordinates[index] = coordinate;
         }
