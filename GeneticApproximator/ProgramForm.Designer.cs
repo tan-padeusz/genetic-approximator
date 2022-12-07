@@ -1,7 +1,13 @@
-﻿namespace GeneticApproximator;
+﻿using System.Runtime.CompilerServices;
+
+namespace GeneticApproximator;
 
 partial class ProgramForm
 {
+    public Label ParametersLabel { get; } = new Label();
+    public Label MaxPolynomialDegreeLabel { get; } = new Label();
+    public NumericUpDown MaxPolynomialDegreeNUD { get; } = new NumericUpDown();
+    
     /// <summary>
     ///  Required designer variable.
     /// </summary>
@@ -29,6 +35,27 @@ partial class ProgramForm
     /// </summary>
     private void InitializeComponent()
     {
+        /// ParametersLabel
+        this.ParametersLabel.AutoSize = true;
+        this.ParametersLabel.Location = new System.Drawing.Point(25, 25);
+        this.ParametersLabel.Size = new Size(150, 25);
+        this.ParametersLabel.Text = "Parametry:";
+        
+        /// MaxPolynomialDegreeLabel
+        this.MaxPolynomialDegreeLabel.AutoSize = true;
+        this.MaxPolynomialDegreeLabel.Location = new System.Drawing.Point(25, 50);
+        this.MaxPolynomialDegreeLabel.Size = new Size(150, 25);
+        this.MaxPolynomialDegreeLabel.Text = "Maksymalny stopień wielomianu:";
+        
+        /// MaxPolynomialDegreeNUD
+        this.MaxPolynomialDegreeNUD.Increment = 1;
+        this.MaxPolynomialDegreeNUD.Location = new System.Drawing.Point(25, 75);
+        this.MaxPolynomialDegreeNUD.Maximum = 4;
+        this.MaxPolynomialDegreeNUD.Minimum = 1;
+        this.MaxPolynomialDegreeNUD.Size = new Size(150, 25);
+        this.MaxPolynomialDegreeNUD.TextAlign = HorizontalAlignment.Center;
+        
+
         this.components = new System.ComponentModel.Container();
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(800, 450);

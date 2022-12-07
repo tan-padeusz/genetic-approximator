@@ -1,52 +1,61 @@
-﻿using System.Runtime.CompilerServices;
+﻿namespace GeneticApproximator;
 
-namespace GeneticApproximator;
-
+/// <summary>
+/// Class representing input point.
+/// </summary>
 public class Point
 {
     /// <summary>
-    /// Point's random number generator.
+    /// Point pseudo-random number generator.
     /// </summary>
     private static Random Random { get; } = new Random();
 
     /// <summary>
-    /// Point's coordinates (0: X, 1:Y, 2:Z).
+    /// Point coordinates.
     /// </summary>
-    private double[] Coordinates { get; } = new double[3];
+    private double[] Coordinates { get; }
     
     /// <summary>
-    /// Point's X coordinate.
+    /// Point X coordinate.
     /// </summary>
     public double X => this.Coordinates[0];
     
     /// <summary>
-    /// Point's Y coordinate.
+    /// Point Y coordinate.
     /// </summary>
     public double Y => this.Coordinates[1];
 
     /// <summary>
-    /// Point's Z coordinate.
+    /// Point Z coordinate.
     /// </summary>
     public double Z => this.Coordinates[2];
 
     /// <summary>
-    /// Point's constructor.
+    /// Point constructor.
     /// </summary>
     public Point()
     {
-        for (int i = 0; i < 3; i++)
+        double[] coordinates = new double[3];
+        for (int index = 0; index < coordinates.Length; index++)
         {
-            this.Coordinates[i] = Point.Random.Next() * InterfaceInputs.CoordinatesRange;
-            if (this.ShouldBeNegative()) this.Coordinates[i] *= -1;
+            double coordinate = Point.Random.NextDouble() * InterfaceInputs.CoordinatesRange;
+            if (this.ShouldCoordinateBeNegative()) coordinate *= -1;
+            coordinates[index] = coordinate;
         }
+        this.Coordinates = coordinates;
     }
 
     /// <summary>
     /// Randomly indicates if coordinate should be negative.
     /// </summary>
     /// <returns>True if coordinate should be negative, false otherwise.</returns>
-    private bool ShouldBeNegative()
+    private bool ShouldCoordinateBeNegative()
     {
         return Point.Random.Next() % 2 == 1;
+    }
+
+    public override string ToString()
+    {
+        return $"[{this.Coordinates[0]}, {this.Coordinates[1]}, {this.Coordinates[2]}]";
     }
 }
