@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GeneticApproximator;
 
@@ -10,6 +11,7 @@ partial class ProgramForm
     public Label BestFunctionOutputLabel { get; } = new Label();
     public Label BitsPerFactorLabel { get; } = new Label();
     public NumericUpDown BitsPerFactorNUD { get; } = new NumericUpDown();
+    public Chart Chart { get; } = new Chart();
     public Label ContestantsLabel { get; } = new Label();
     public NumericUpDown ContestantsNUD { get; } = new NumericUpDown();
     public RichTextBox ControlResultsRTB { get; } = new RichTextBox();
@@ -20,6 +22,7 @@ partial class ProgramForm
     public Label HorizontalSeparator { get; } = new Label();
     public Label InputPointsLabel { get; } = new Label();
     public NumericUpDown InputPointsNUD { get; } = new NumericUpDown();
+    public Label LeftVerticalSeparator { get; } = new Label();
     public Label MaxPolynomialDegreeLabel { get; } = new Label();
     public NumericUpDown MaxPolynomialDegreeNUD { get; } = new NumericUpDown();
     public Label MinimalErrorLabel { get; } = new Label();
@@ -30,9 +33,10 @@ partial class ProgramForm
     public Label PopulationsCreatedOutputLabel { get; } = new Label();
     public Label PopulationSizeLabel { get; } = new Label();
     public NumericUpDown PopulationSizeNUD { get; } = new NumericUpDown();
+    public Label RightVerticalSeparator { get; } = new Label();
     public Button StartButton { get; } = new Button();
     public Button StopButton { get; } = new Button();
-    public Label VerticalSeparator { get; } = new Label();
+    
 
     /// <summary>
     ///  Required designer variable.
@@ -75,7 +79,7 @@ partial class ProgramForm
         this.BestFunctionLabel.Location = new System.Drawing.Point(230, 60);
         this.BestFunctionLabel.Size = new System.Drawing.Size(610, 20);
         this.BestFunctionLabel.Text = "BEST FUNCTION";
-        this.BestFunctionLabel.TextAlign = ContentAlignment.MiddleLeft;
+        this.BestFunctionLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// BestFunctionOutputLabel
         this.BestFunctionOutputLabel.Location = new System.Drawing.Point(230, 80);
@@ -98,6 +102,11 @@ partial class ProgramForm
         this.BitsPerFactorNUD.TextAlign = HorizontalAlignment.Center;
         this.BitsPerFactorNUD.Value = 8;
         
+        /// Chart
+        this.Chart.ChartAreas.Add(this.CreateChartArea());
+        this.Chart.Location = new System.Drawing.Point(870, 10);
+        this.Chart.Size = new System.Drawing.Size(440, 440);
+        
         /// ContestantsLabel
         this.ContestantsLabel.Location = new System.Drawing.Point(10, 210);
         this.ContestantsLabel.Size = new System.Drawing.Size(200, 20);
@@ -114,8 +123,8 @@ partial class ProgramForm
         this.ContestantsNUD.Value = 20;
         
         /// ControlResultsRTB
-        this.ControlResultsRTB.Location = new System.Drawing.Point(230, 120);
-        this.ControlResultsRTB.Size = new System.Drawing.Size(610, 280);
+        this.ControlResultsRTB.Location = new System.Drawing.Point(230, 170);
+        this.ControlResultsRTB.Size = new System.Drawing.Size(620, 280);
         
         /// CoordinatesRangeLabel
         this.CoordinatesRangeLabel.Location = new System.Drawing.Point(10, 60);
@@ -147,7 +156,7 @@ partial class ProgramForm
         
         /// HorizontalSeparator
         this.HorizontalSeparator.BackColor = Color.DarkGray;
-        this.HorizontalSeparator.Location = new System.Drawing.Point(230, 109);
+        this.HorizontalSeparator.Location = new System.Drawing.Point(230, 159);
         this.HorizontalSeparator.Size = new System.Drawing.Size(610, 3);
         
         /// InputPointsLabel
@@ -164,6 +173,11 @@ partial class ProgramForm
         this.InputPointsNUD.Size = new System.Drawing.Size(200, 20);
         this.InputPointsNUD.TextAlign = HorizontalAlignment.Center;
         this.InputPointsNUD.Value = 20;
+        
+        /// LeftVerticalSeparator
+        this.LeftVerticalSeparator.BackColor = Color.DarkGray;
+        this.LeftVerticalSeparator.Location = new System.Drawing.Point(219, 10);
+        this.LeftVerticalSeparator.Size = new System.Drawing.Size(3, 440);
 
         /// MaxPolynomialDegreeLabel
         this.MaxPolynomialDegreeLabel.Location = new System.Drawing.Point(10, 110);
@@ -181,13 +195,13 @@ partial class ProgramForm
         this.MaxPolynomialDegreeNUD.Value = 2;
         
         /// MinimalErrorLabel
-        this.MinimalErrorLabel.Location = new System.Drawing.Point(640, 10);
+        this.MinimalErrorLabel.Location = new System.Drawing.Point(650, 10);
         this.MinimalErrorLabel.Size = new System.Drawing.Size(200, 20);
         this.MinimalErrorLabel.Text = "MINIMAL ERROR";
         this.MinimalErrorLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// MinimalErrorOutputLabel
-        this.MinimalErrorOutputLabel.Location = new System.Drawing.Point(640, 30);
+        this.MinimalErrorOutputLabel.Location = new System.Drawing.Point(650, 30);
         this.MinimalErrorOutputLabel.Size = new System.Drawing.Size(200, 20);
         this.MinimalErrorOutputLabel.Text = "MINIMAL ERROR";
         this.MinimalErrorOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -209,13 +223,13 @@ partial class ProgramForm
         this.MutationProbabilityNUD.Value = (decimal)0.05;
         
         /// PopulationsCreatedLabel
-        this.PopulationsCreatedLabel.Location = new System.Drawing.Point(430, 10);
+        this.PopulationsCreatedLabel.Location = new System.Drawing.Point(440, 10);
         this.PopulationsCreatedLabel.Size = new System.Drawing.Size(200, 20);
         this.PopulationsCreatedLabel.Text = "POPULATIONS CREATED";
         this.PopulationsCreatedLabel.TextAlign = ContentAlignment.MiddleCenter;
         
         /// PopulationsCreatedOutputLabel
-        this.PopulationsCreatedOutputLabel.Location = new System.Drawing.Point(430, 30);
+        this.PopulationsCreatedOutputLabel.Location = new System.Drawing.Point(440, 30);
         this.PopulationsCreatedOutputLabel.Size = new System.Drawing.Size(200, 20);
         this.PopulationsCreatedOutputLabel.Text = "POPULATIONS CREATED";
         this.PopulationsCreatedOutputLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -235,6 +249,11 @@ partial class ProgramForm
         this.PopulationSizeNUD.TextAlign = HorizontalAlignment.Center;
         this.PopulationSizeNUD.Value = 1000;
         
+        /// RightVerticalSeparator
+        this.RightVerticalSeparator.BackColor = Color.DarkGray;
+        this.RightVerticalSeparator.Location = new System.Drawing.Point(859, 10);
+        this.RightVerticalSeparator.Size = new System.Drawing.Size(3, 440);
+        
         /// StartButton
         this.StartButton.Click += new System.EventHandler(this.StartButtonClick);
         this.StartButton.Location = new System.Drawing.Point(10, 410);
@@ -244,18 +263,15 @@ partial class ProgramForm
         
         /// StopButton
         this.StopButton.Click += new System.EventHandler(this.StopButtonClick);
-        this.StopButton.Location = new System.Drawing.Point(230, 410);
+        this.StopButton.Location = new System.Drawing.Point(440, 110);
         this.StopButton.Size = new System.Drawing.Size(200, 40);
         this.StopButton.Text = "STOP";
         this.StopButton.TextAlign = ContentAlignment.MiddleCenter;
         
-        /// VerticalSeparator
-        this.VerticalSeparator.BackColor = Color.DarkGray;
-        this.VerticalSeparator.Location = new System.Drawing.Point(219, 10);
-        this.VerticalSeparator.Size = new System.Drawing.Size(3, 440);
+        
         
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(850, 460);
+        this.ClientSize = new System.Drawing.Size(1320, 460);
         this.Controls.AddRange(new Control[]
         {
             this.AxisBorderValueLabel,
@@ -264,6 +280,7 @@ partial class ProgramForm
             this.BestFunctionOutputLabel,
             this.BitsPerFactorLabel,
             this.BitsPerFactorNUD,
+            this.Chart,
             this.ContestantsLabel,
             this.ContestantsNUD,
             this.ControlResultsRTB,
@@ -274,6 +291,7 @@ partial class ProgramForm
             this.HorizontalSeparator,
             this.InputPointsLabel,
             this.InputPointsNUD,
+            this.LeftVerticalSeparator,
             this.MaxPolynomialDegreeLabel,
             this.MaxPolynomialDegreeNUD,
             this.MinimalErrorLabel,
@@ -284,10 +302,29 @@ partial class ProgramForm
             this.PopulationsCreatedOutputLabel,
             this.PopulationSizeLabel,
             this.PopulationSizeNUD,
+            this.RightVerticalSeparator,
             this.StartButton,
             this.StopButton,
-            this.VerticalSeparator
         });
         this.Text = "GENETIC APPROXIMATOR";
+    }
+
+    private ChartArea CreateChartArea()
+    {
+        ChartArea area = new ChartArea();
+        
+        area.AxisX.Title = "X";
+        area.AxisX.Minimum = 0;
+        area.AxisX.Maximum = 100;
+        area.AxisX.Interval = 10;
+
+        area.AxisY.Title = "Y";
+        area.AxisY.Minimum = 0;
+        area.AxisY.Maximum = 100;
+        area.AxisY.Interval = 10;
+
+        area.Area3DStyle.Enable3D = true;
+
+        return area;
     }
 }

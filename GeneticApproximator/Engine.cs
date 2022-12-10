@@ -5,7 +5,7 @@ namespace GeneticApproximator;
 
 public static class Engine
 {
-    private static Individual GlobalBestIndividual { get; set; }
+    private static Individual? GlobalBestIndividual { get; set; } = null;
     private static long LastImprovementId { get; set; }
     private static Population CurrentPopulation { get; set; }
     
@@ -13,6 +13,7 @@ public static class Engine
 
     public static void Run(object? sender, DoWorkEventArgs args)
     {
+        Console.WriteLine("I'm here!");
         Engine.LastTickCount = Environment.TickCount;
         Program.Stopwatch.Restart();
         Engine.CurrentPopulation = new Population(InterfaceInputs.InputPoints);
@@ -56,8 +57,9 @@ public static class Engine
         StringBuilder builder = new StringBuilder();
         foreach (Point point in InterfaceInputs.InputPoints)
         {
-            double pointError = Engine.GlobalBestIndividual.CalculatePointError(point);
-            builder.Append($"{point.ToString()} : {pointError}\n");
+            double functionResult = Engine.GlobalBestIndividual.CalculateFunctionResult(point);
+            double errorValue = Math.Abs(functionResult - point.Z);
+            builder.Append($"{point.ToString()} : [{functionResult},{errorValue}]\n");
         }
         builder.Remove(builder.Length - 2, 2);
         Program.ProgramForm.ControlResultsRTB.Text = builder.ToString();

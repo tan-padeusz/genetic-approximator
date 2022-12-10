@@ -35,7 +35,7 @@ public class Individual
     {
         this.GeneSequence = new GeneSequence();
         this.Factors = this.DecodeGenes();
-        this.Error = this.CalculateError(points);
+        this.Error = this.CalculateAveragePointError(points);
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ public class Individual
     {
         this.GeneSequence = new GeneSequence(parents);
         this.Factors = this.DecodeGenes();
-        this.Error = this.CalculateError(points);
+        this.Error = this.CalculateAveragePointError(points);
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class Individual
     /// </summary>
     /// <param name="points">Array of input points.</param>
     /// <returns>Average error value for given array of input points.</returns>
-    private double CalculateError(Point[] points)
+    private double CalculateAveragePointError(Point[] points)
     {
         double error = 0;
         foreach (Point point in points) error += this.CalculatePointError(point);
@@ -106,13 +106,52 @@ public class Individual
     /// </summary>
     /// <param name="point">Input point.</param>
     /// <returns>Error value for given input point.</returns>
-    public double CalculatePointError(Point point)
+    private double CalculatePointError(Point point)
     {
         int maxPolynomialDegree = InterfaceInputs.MaxPolynomialDegree;
+        return Math.Pow(this.CalculateFunctionResult(point) - point.Z, 2); // Possible other metrics.
         double error = 0;
         for (int xi = 0; xi <= maxPolynomialDegree; xi++) for (int yi = 0; yi <= maxPolynomialDegree; yi++)
             error += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
         return Math.Pow(error - point.Z, 2); // Possible other metrics.
+    }
+
+    /// <summary>
+    /// Calculates individual function result for given input point.
+    /// </summary>
+    /// <param name="point">Input point.</param>
+    /// <returns>Function result for given input point.</returns>
+    public double CalculateFunctionResult(Point point)
+    {
+        /*
+        int maxPolynomialDegree = InterfaceInputs.MaxPolynomialDegree;
+        double result = 0;
+        for (int xi = 0; xi <= maxPolynomialDegree; xi++) for (int yi = 0; yi <= maxPolynomialDegree; yi++)
+            result += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
+        return result;
+        */
+
+        /*
+        int mpd = InterfaceInputs.MaxPolynomialDegree;
+        double result = 0;
+        for (int i = 0; i < (mpd + 1) * (mpd + 1); i++)
+        {
+            int xi = i / (mpd + 1);
+            int yi = i - xi * (mpd + 1);
+            result += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
+        }
+        return result;
+        */
+
+        int mpd = InterfaceInputs.MaxPolynomialDegree;
+        double result = 0;
+        Parallel.For(0, (mpd + 1) * (mpd + 1), i =>
+        {
+            int xi = i / (mpd + 1);
+            int yi = i - xi * (mpd + 1);
+            result += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
+        });
+        return result;
     }
 
     public override string ToString()
