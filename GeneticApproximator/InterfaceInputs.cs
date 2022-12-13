@@ -30,7 +30,7 @@ public static class InterfaceInputs
     /// <summary>
     /// Array of input points.
     /// </summary>
-    public static Point[] InputPoints { get; set; } = new Point[0];
+    public static InputPoint[] InputPoints { get; set; } = new InputPoint[0];
 
     /// <summary>
     /// Number of individuals in each population.

@@ -13,7 +13,6 @@ public static class Engine
 
     public static void Run(object? sender, DoWorkEventArgs args)
     {
-        Console.WriteLine("I'm here!");
         Engine.LastTickCount = Environment.TickCount;
         Program.Stopwatch.Restart();
         Engine.CurrentPopulation = new Population(InterfaceInputs.InputPoints);
@@ -55,13 +54,14 @@ public static class Engine
     {
         Program.Stopwatch.Stop();
         StringBuilder builder = new StringBuilder();
-        foreach (Point point in InterfaceInputs.InputPoints)
+        builder.Append("[X ; Y ; Z] : [RESULT ; ERROR] : [TEST]\n");
+        foreach (InputPoint point in InterfaceInputs.InputPoints)
         {
-            double functionResult = Engine.GlobalBestIndividual.CalculateFunctionResult(point);
-            double errorValue = Math.Abs(functionResult - point.Z);
-            builder.Append($"{point.ToString()} : [{functionResult},{errorValue}]\n");
+            double functionResult = Math.Round(Engine.GlobalBestIndividual.CalculateFunctionResult(point), 3);
+            double errorValue = Math.Round(Math.Abs(functionResult - point.Z), 3);
+            builder.Append($"{point.ToString()} : [{functionResult} ; {errorValue}] : [{Math.Round(Engine.TestFunction(point), 3)}]\n");
         }
-        builder.Remove(builder.Length - 2, 2);
+        builder.Remove(builder.Length - 1, 1);
         Program.ProgramForm.ControlResultsRTB.Text = builder.ToString();
     }
 
@@ -78,5 +78,10 @@ public static class Engine
         if (seconds < 10) secondsString = "0" + secondsString;
 
         return minutesString + ":" + secondsString;
+    }
+
+    private static double TestFunction(InputPoint point)
+    {
+        return 4.8458 + 2.2165 * point.X - 4.1071 * point.Y;
     }
 }

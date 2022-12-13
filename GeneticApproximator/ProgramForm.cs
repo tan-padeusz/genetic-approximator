@@ -21,7 +21,7 @@ public partial class ProgramForm : Form
         // Point[] points = new Point[pointCount];
         // for (int index = 0; index < pointCount; index++) points[index] = new Point(pointRange);
         // InterfaceInputs.InputPoints = points;
-        InterfaceInputs.InputPoints = Point.GetTestPoints();
+        InterfaceInputs.InputPoints = InputPoint.GetTestPoints();
         
         Program.BackgroundWorker.RunWorkerAsync();
     }

@@ -1,7 +1,7 @@
 ﻿namespace GeneticApproximator;
 
 /// <summary>
-/// Single gene in <see cref="GeneSequence">gene sequence</see> of <see cref="Individual">individual</see>.
+/// Single gene in gene sequence of individual.
 /// </summary>
 public class Gene
 {
@@ -13,12 +13,12 @@ public class Gene
     /// <summary>
     /// Gene value.
     /// </summary>
-    public bool Value { get; }
+    private bool Value { get; }
 
     /// <summary>
     /// Creates new gene with random value.
     /// </summary>
-    public Gene()
+    private Gene()
     {
         this.Value = Gene.Random.Next() % 2 == 1;
     }
@@ -27,8 +27,48 @@ public class Gene
     /// Creates new gene with specified value.
     /// </summary>
     /// <param name="value">Gene value.</param>
-    public Gene(bool value)
+    private Gene(bool value)
     {
         this.Value = value;
+    }
+
+    /// <summary>
+    /// Creates new gene with same value as this gene.
+    /// </summary>
+    /// <returns>New gene.</returns>
+    public Gene Same()
+    {
+        return new Gene(this.Value);
+    }
+
+    /// <summary>
+    /// Creates new gene with opposite value to this gene.
+    /// </summary>
+    /// <returns>New gene.</returns>
+    public Gene Opposite()
+    {
+        return new Gene(!this.Value);
+    }
+
+    public static bool operator true(Gene gene)
+    {
+        return gene.Value;
+    }
+
+    public static bool operator false(Gene gene)
+    {
+        return !gene.Value;
+    }
+
+    /// <summary>
+    /// Generates array of genes with random values.
+    /// </summary>
+    /// <param name="size">Array size.</param>
+    /// <returns>Array of genes.</returns>
+    public static Gene[] GenerateGenes(int size)
+    {
+        Gene[] genes = new Gene[size];
+        for (int index = 0; index < size; index++) genes[index] = new Gene();
+        return genes;
     }
 }

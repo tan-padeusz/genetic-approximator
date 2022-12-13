@@ -39,13 +39,11 @@ public class GeneSequence
     public GeneSequence()
     {
         int size = (int)Math.Pow(InterfaceInputs.MaxPolynomialDegree + 1, 2) * InterfaceInputs.BitsPerFactor;
-        Gene[] genes = new Gene[size];
-        for (int index = 0; index < size; index++) genes[index] = new Gene();
-        this.Genes = genes;
+        this.Genes = Gene.GenerateGenes(size);
     }
 
     /// <summary>
-    /// Creates new gene sequence for offspring <see cref="Individual">individual</see>.
+    /// Creates new gene sequence for offspring individual.
     /// </summary>
     /// <param name="parents">Individual parents.</param>
     public GeneSequence(Individual[] parents)
@@ -56,10 +54,8 @@ public class GeneSequence
         for (int index = 0; index < size; index++)
         {
             Individual currentParent = index <= divisionPointIndex ? parents[0] : parents[1];
-            bool geneValue = GeneSequence.Random.NextDouble() < InterfaceInputs.MutationProbability
-                ? currentParent.GeneSequence[index].Value
-                : !currentParent.GeneSequence[index].Value;
-            genes[index] = new Gene(geneValue);
+            Gene gene = currentParent.GeneSequence[index];
+            genes[index] = GeneSequence.Random.NextDouble() < InterfaceInputs.MutationProbability ? gene.Same() : gene.Opposite();
         }
         this.Genes = genes;
     }

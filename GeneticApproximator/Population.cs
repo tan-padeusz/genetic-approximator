@@ -12,7 +12,7 @@ public class Population
     
     private Individual[] Individuals { get; }
 
-    public Population(Point[] points)
+    public Population(InputPoint[] points)
     {
         this.Id = 1;
         this.Individuals = this.GeneratePopulation(points);
@@ -20,7 +20,7 @@ public class Population
         this.AverageError = this.CalculateAverageError();
     }
 
-    public Population(Point[] points, Population previousPopulation)
+    public Population(InputPoint[] points, Population previousPopulation)
     {
         this.Id = previousPopulation.Id + 1;
         this.Individuals = this.GeneratePopulation(points, previousPopulation);
@@ -35,7 +35,7 @@ public class Population
         return error / this.Individuals.Length;
     }
 
-    private Individual[] GeneratePopulation(Point[] points)
+    private Individual[] GeneratePopulation(InputPoint[] points)
     {
         int size = InterfaceInputs.PopulationSize;
         Individual[] individuals = new Individual[size];
@@ -48,7 +48,7 @@ public class Population
         return individuals;
     }
 
-    private Individual[] GeneratePopulation(Point[] points, Population previousPopulation)
+    private Individual[] GeneratePopulation(InputPoint[] points, Population previousPopulation)
     {
         int size = InterfaceInputs.PopulationSize;
         Individual[] individuals = new Individual[size];
@@ -61,7 +61,7 @@ public class Population
         return individuals;
     }
 
-    private Individual Contest(Point[] points, Population previousPopulation)
+    private Individual Contest(InputPoint[] points, Population previousPopulation)
     {
         int availableIndividuals = previousPopulation.Individuals.Length;
         Individual?[] parents = new Individual?[] { null, null };

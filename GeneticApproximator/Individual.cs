@@ -31,7 +31,7 @@ public class Individual
     /// Creates new individual with random genes.
     /// </summary>
     /// <param name="points">Array of input points.</param>
-    public Individual(Point[] points)
+    public Individual(InputPoint[] points)
     {
         this.GeneSequence = new GeneSequence();
         this.Factors = this.DecodeGenes();
@@ -43,7 +43,7 @@ public class Individual
     /// </summary>
     /// <param name="points">Array of input Points.</param>
     /// <param name="parents">Parents of new Individual.</param>
-    public Individual(Point[] points, Individual[] parents)
+    public Individual(InputPoint[] points, Individual[] parents)
     {
         this.GeneSequence = new GeneSequence(parents);
         this.Factors = this.DecodeGenes();
@@ -64,8 +64,8 @@ public class Individual
         for (int xi = 0; xi <= maxPolynomialDegree; xi++) for (int yi = 0; yi <= maxPolynomialDegree; yi++)
         {
             double factor = 0;
-            for (int gi = 0; gi < bitsPerFactor; gi++) if (this.GeneSequence[xi, yi, gi].Value) factor += axisValues[gi];
-            factors[xi, yi] = factor / bitsPerFactor;
+            for (int gi = 0; gi < bitsPerFactor; gi++) if (this.GeneSequence[xi, yi, gi]) factor += axisValues[gi];
+            factors[xi, yi] = Math.Round(factor / bitsPerFactor, 3);
         }
         
         return factors;
@@ -94,10 +94,10 @@ public class Individual
     /// </summary>
     /// <param name="points">Array of input points.</param>
     /// <returns>Average error value for given array of input points.</returns>
-    private double CalculateAveragePointError(Point[] points)
+    private double CalculateAveragePointError(InputPoint[] points)
     {
         double error = 0;
-        foreach (Point point in points) error += this.CalculatePointError(point);
+        foreach (InputPoint point in points) error += this.CalculatePointError(point);
         return error / points.Length;
     }
 
@@ -106,7 +106,7 @@ public class Individual
     /// </summary>
     /// <param name="point">Input point.</param>
     /// <returns>Error value for given input point.</returns>
-    private double CalculatePointError(Point point)
+    private double CalculatePointError(InputPoint point)
     {
         int maxPolynomialDegree = InterfaceInputs.MaxPolynomialDegree;
         return Math.Pow(this.CalculateFunctionResult(point) - point.Z, 2); // Possible other metrics.
@@ -121,7 +121,7 @@ public class Individual
     /// </summary>
     /// <param name="point">Input point.</param>
     /// <returns>Function result for given input point.</returns>
-    public double CalculateFunctionResult(Point point)
+    public double CalculateFunctionResult(InputPoint point)
     {
         /*
         int maxPolynomialDegree = InterfaceInputs.MaxPolynomialDegree;
@@ -131,7 +131,7 @@ public class Individual
         return result;
         */
 
-        /*
+        
         int mpd = InterfaceInputs.MaxPolynomialDegree;
         double result = 0;
         for (int i = 0; i < (mpd + 1) * (mpd + 1); i++)
@@ -141,8 +141,8 @@ public class Individual
             result += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
         }
         return result;
-        */
-
+        
+        /*
         int mpd = InterfaceInputs.MaxPolynomialDegree;
         double result = 0;
         Parallel.For(0, (mpd + 1) * (mpd + 1), i =>
@@ -152,6 +152,7 @@ public class Individual
             result += this.Factors[xi, yi] * Math.Pow(point.X, xi) * Math.Pow(point.Y, yi);
         });
         return result;
+        */
     }
 
     public override string ToString()
